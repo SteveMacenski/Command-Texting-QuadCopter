@@ -39,31 +39,38 @@ def sms():
         commands = open('commands.txt','w')
         if "up" in word:
                 #     ser.write('0')
-            commands.write('up')
+            commands.write('U')
             sleep(1)
         elif "down" in word:
                 #     ser.write('1')
-            commands.write('down')
+            commands.write('D')
             sleep(1)
         elif "left" in word:
                 #     ser.write('2')
-            commands.write('left')
+            commands.write('L')
             sleep(1)
         elif "right" in word:
                 #     ser.write('3')
-            commands.write('right')
+            commands.write('R')
             sleep(1)
         elif "paint" in word:
-            commands.write('paint')
+            commands.write('C')
                 #     ser.write('4')
             resp = twilio.twiml.Response()
-            resp.message("Painted!")
+            resp.message("Cleaned!")
+            return str(resp)
+            sleep(1)
+        elif "GPS" in word:
+            commands.write('G')
+                #     ser.write('5')
+            resp = twilio.twiml.Response()
+            resp.message("Went to GPS coordinates!")
             return str(resp)
             sleep(1)
         else:
             # Bad command
             resp = twilio.twiml.Response()
-            resp.message("Oops! Try saying up, down, left, or right :)")
+            resp.message("Oops! Try saying up, down, left, right, clean, or GPS :)")
             return str(resp)
         commands.close()    #ensures last commands is the only one taken
         

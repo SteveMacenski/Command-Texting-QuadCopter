@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+int main(){
+
+	char L[] = "L";
+	char R[] = "R";
+	char U[] = "U";
+	char D[] = "D";
+	char C[] = "C";
+	char G[] = "G";
+	char N[] = "N";
+
+	FILE *fp = fopen("commands.txt","r");
+
+	char str[2];
+	fgets (str, 2, fp);
+
+	fprintf("command is %f\n", str);
+
+	fclose(fp);
+
+	if (strcmp(str,N) != 0){
+		FILE *fp = fopen("commands.txt","w+");
+		fprintf(fp,"N");
+		fclose(fp);
+	}
+
+
+	if (strcmp(str,L) == 0){
+        	printf("command is left, do stuff\n");
+	}
+        elseif (strcmp(str,R) == 0){
+       		printf("command is right do stuff\n");
+	}
+        elseif (strcmp(str,U) == 0){
+       		printf("command is up do stuff\n");
+	}
+        elseif (strcmp(str,D) == 0){
+       		printf("command is down do stuff\n");
+	}
+        elseif (strcmp(str,C) == 0){
+       		printf("command is clean do stuff\n");
+	}
+        elseif (strcmp(str,G) == 0){
+       		printf("command is GPS go to coordinates\n");
+	}
+        else {
+       		printf("command is Null or bad do NOTHING ever, hover\n");
+	}
+
+}
