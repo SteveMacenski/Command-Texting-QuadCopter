@@ -7,7 +7,7 @@ Make sure that your codes are in the same directory as the ngrok program in your
 Also will read in GPS coordinates of location and commands the quad to follow home
 
 
-TODO make matlab point to file in python27 directory. 
+TODO make C point to file in python27 directory. 
 
 setup: 
 in lab download twilio, necessary libraries, ngrok in the python folder. point matlab path to python27 for commands.txt file. Follow instructions. 
