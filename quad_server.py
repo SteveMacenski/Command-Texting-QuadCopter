@@ -1,4 +1,6 @@
 from flask import Flask, request, redirect
+import sys
+sys.path.append("C:\Python27\Lib\site-packages")
 from flask import *
 import twilio.twiml
 import serial
@@ -9,24 +11,6 @@ import json
 import os 
  
 app = Flask(__name__)
- 
-                #@app.route("/", methods=['GET', 'POST'])
-                #def hello_monkey():
-                #    """Respond to incoming texts with a simple text message."""
- 
-                #    resp = twilio.twiml.Response()
-                #    resp.message("Hello, please send your command")
-                #    return str(resp)
- 
-                ##matlab_command = open('commands.txt','w')   #proof for each write over it replaces text. 
-                ##matlab_command.write('initialized');
-                ##matlab_command.close()
-                ##matlab_command = open('commands.txt','w')
-                ##matlab_command.write('try two');
-                ##matlab_command.close()
-                ##matlab_command = open('commands.txt','w')
-                ##matlab_command.write('try three');
-                ##matlab_command.close()
 
 @app.route("/", methods=['GET', 'POST'])
 def sms():
@@ -36,7 +20,7 @@ def sms():
     print str(wordsList)
     sleep(2)
     for word in wordsList:
-        commands = open('commands.txt','w')
+        commands = open('C:\Python27\Command-Texting-QuadCopter\AE483GroundStation\commands.txt','w')
         if "up" in word:
                 #     ser.write('0')
             commands.write('U')
@@ -53,24 +37,39 @@ def sms():
                 #     ser.write('3')
             commands.write('R')
             sleep(1)
-        elif "paint" in word:
-            commands.write('C')
+        elif "forward" in word:
                 #     ser.write('4')
+            commands.write('F')
+            sleep(1)
+        elif "back" in word:
+                #     ser.write('5')
+            commands.write('B')
+            sleep(1)
+        elif "land" in word:
+            commands.write('Z')
+                #     ser.write('6')
+            resp = twilio.twiml.Response()
+            resp.message("Landed!")
+            return str(resp)
+            sleep(1)
+        elif "clean" in word:
+            commands.write('C')
+                #     ser.write('7')
             resp = twilio.twiml.Response()
             resp.message("Cleaned!")
             return str(resp)
             sleep(1)
-        elif "GPS" in word:
+        elif "gps" in word:
             commands.write('G')
-                #     ser.write('5')
+                #     ser.write('8')
             resp = twilio.twiml.Response()
-            resp.message("Went to GPS coordinates!")
+            resp.message("Moved to those coordinates!")
             return str(resp)
             sleep(1)
         else:
             # Bad command
             resp = twilio.twiml.Response()
-            resp.message("Oops! Try saying up, down, left, right, clean, or GPS :)")
+            resp.message("Oops! Try saying up, down, left, right, forward, back, clean, land or GPS :)")
             return str(resp)
         commands.close()    #ensures last commands is the only one taken
         
